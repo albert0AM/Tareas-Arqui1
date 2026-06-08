@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# 1. Ensamblar y Enlazar
+aarch64-linux-gnu-as $1.s -o $1.o
+aarch64-linux-gnu-ld $1.o -o $1
+
+# 2. Ejecutar y mostrar el resultado a secas
+qemu-aarch64 ./$1
+echo $?
+rm $1.o $1
