@@ -6,5 +6,4 @@ aarch64-linux-gnu-ld $1.o -o $1
 
 # 2. Ejecutar y mostrar el resultado a secas
 qemu-aarch64 ./$1
-echo $?
 rm $1.o $1
