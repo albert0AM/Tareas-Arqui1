@@ -22,7 +22,7 @@ INCLUDES = utils.s
 # Detectar todos los .s excepto los de INCLUDES
 PROGS    = $(filter-out $(INCLUDES), $(wildcard *.s))
 
-# Ejecutables finales: build/suma, build/resta, etc.
+# Ejecutables finales: build/modulo_3_anomalias, build/resta, etc.
 TARGETS  = $(patsubst %.s,$(BUILD)/%,$(PROGS))
 
 # ----------------------------------------------------------
@@ -60,14 +60,14 @@ run: all
 	done
 
 # ----------------------------------------------------------
-# Ejecutar uno solo: make run-suma, make run-resta, etc.
+# Ejecutar uno solo: make run-modulo_3_anomalias, make run-resta, etc.
 # ----------------------------------------------------------
 run-modulo_3_anomalias: ARGS ?= 2
 run-%: $(BUILD)/%
 	$(QEMU) $< $(ARGS)
 
 # ----------------------------------------------------------
-# Depuración GDB para un programa: make gdb-suma
+# Depuración GDB para un programa: make gdb-modulo_3_anomalias
 # ----------------------------------------------------------
 gdb-%: $(BUILD)/%
 	@echo "Esperando GDB en puerto 1234 para $< ..."
