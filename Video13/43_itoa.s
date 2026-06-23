@@ -9,7 +9,7 @@ itoa:
 
     // count digits
     mov x12, x9         // x9 saved
-    mov x13, #1         // counter
+    mov x13, #0         // CORREGIDO: Empezar en 0 para contar exacto los digitos
 count:
     cbz x12, end_count  // if x12==0 end
     udiv x12, x12, x11  // num = num / 10
@@ -17,10 +17,11 @@ count:
     b count             
 
 end_count:
-    add x10, x10, x13   // store at end digits
-    strb wzr, [x10]     // '\0'
-    add x10, x10, #-1   //
-    add x10, x10, #-1   // ready to store number
+    add x10, x10, x13   // Avanzar el buffer al final de los digitos
+    strb wzr, [x10, #1] // CORREGIDO: Coloca el terminador '\0' al final absoluto
+    mov x12, #10        // CORREGIDO: Carga el codigo ASCII del salto de linea (\n)
+    strb w12, [x10]     // CORREGIDO: Guarda el '\n' justo antes del '\0'
+    add x10, x10, #-1   // CORREGIDO: Ajusta el puntero para empezar a escribir los digitos
 
     // put last digit in buffer
 loop:
